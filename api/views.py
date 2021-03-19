@@ -7,19 +7,19 @@ from rest_framework.parsers import JSONParser
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from django.contrib.auth import login
+from rest_framework.authtoken.models import Token
 
 
 @csrf_exempt
 def signup(request):
-    """Allow users to SignUp through the CUrl JSON command"""
+    """Allow users to SignUp through the CUrl command"""
     if request.method == 'POST':
         try:
             data = JSONParser().parse(request)
             user = User.objects.create_user(data['username'], password=data['password'])
             user.save()
-            login(request, user)
-            return JsonResponse({'token': 'sadfjhb'}, status=201)
+            token = Token.objects.create(user=user)
+            return JsonResponse({'token': str(token)}, status=201)
         except IntegrityError:
             return JsonResponse({'error': 'That username has already been taken. Please choose a new username'},
                                 status=400)
