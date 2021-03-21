@@ -8,11 +8,15 @@ from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from rest_framework.authtoken.models import Token
+from django.contrib.auth import authenticate
 
 
 @csrf_exempt
 def signup(request):
-    """Allow users to SignUp through the CUrl command"""
+    """
+    Allow users to SignUp through the CUrl command and return a Token
+    for future request authentications.
+    """
     if request.method == 'POST':
         try:
             data = JSONParser().parse(request)
@@ -23,6 +27,27 @@ def signup(request):
         except IntegrityError:
             return JsonResponse({'error': 'That username has already been taken. Please choose a new username'},
                                 status=400)
+
+
+@csrf_exempt
+def login(request):
+    """
+    Allow users to SignUp through the CUrl command and return a Token
+    for future request authentications.
+    """
+    if request.method == 'POST':
+        data = JSONParser().parse(request)
+        user = authenticate(request, username=data['username'], password=data['password'])
+        if user is None:
+            return JsonResponse({'error': 'Could not login. Please check username and password'}, status=400)
+        else:
+            try:
+                # If the user already have a Token, just get.
+                token = Token.objects.get(user=user)
+            except:
+                # If the user doesn't have the token, create one.
+                token = Token.objects.create(user=user)
+            return JsonResponse({'token': str(token)}, status=200)
 
 
 class TodoCompletedList(generics.ListAPIView):

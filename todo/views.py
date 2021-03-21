@@ -28,6 +28,7 @@ def signupuser(request):
         else:
             return render(request, 'todo/signupuser.html', {'form':UserCreationForm(), 'error':'Passwords did not match'})
 
+
 def loginuser(request):
     if request.method == 'GET':
         return render(request, 'todo/loginuser.html', {'form':AuthenticationForm()})
@@ -39,11 +40,13 @@ def loginuser(request):
             login(request, user)
             return redirect('currenttodos')
 
+
 @login_required
 def logoutuser(request):
     if request.method == 'POST':
         logout(request)
         return redirect('home')
+
 
 @login_required
 def createtodo(request):
@@ -58,6 +61,7 @@ def createtodo(request):
             return redirect('currenttodos')
         except ValueError:
             return render(request, 'todo/createtodo.html', {'form':TodoForm(), 'error':'Bad data passed in. Try again.'})
+
 
 @login_required
 def currenttodos(request):
