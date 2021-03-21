@@ -19,11 +19,15 @@ Course:
 ![](Screenshots/new_todo.png)
 &nbsp;
 - Creating a new user through CUrl Comand and Receive the User's Token
-ˋcurl -X "POST" http://127.0.0.1:8000/api/signup -H 'Content-Type: application/json' -d '{"username":"test_user","password":"abc123"}'ˋ
+```
+curl -X "POST" http://127.0.0.1:8000/api/signup -H 'Content-Type: application/json' -d '{"username":"test_user","password":"abc123"}'
+```
 [](Screenshots/new-user.png)
 &nbsp;
 - Creating a new ToDo through CUrl
-ˋcurl -X "POST" http://127.0.0.1:8000/api/todos -H 'Content-Type: application/json' -H 'Authorization: Token 4c38b8e43682f5d2e4046ff2545fb349a6e4ca87' -d '{"title": "ToDoTest","memo": "","important": true}'ˋ
+```
+curl -X "POST" http://127.0.0.1:8000/api/todos -H 'Content-Type: application/json' -H 'Authorization: Token 4c38b8e43682f5d2e4046ff2545fb349a6e4ca87' -d '{"title": "ToDoTest","memo": "","important": true}'
+```
 [](Screenshots/new_todo2.png)
   
 ## Getting started
