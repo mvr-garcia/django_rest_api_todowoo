@@ -1,4 +1,4 @@
-TodoWoo - Django Projet with REST API and Token Authentication
+TodoWoo - Django Project with REST API and Token Authentication
 ======
 
 TodoWoo is a web application that create a ToDo List. The application has a Rest API built with Django Rest Framework - DRF.
@@ -22,13 +22,13 @@ Course:
 ```
 curl -X "POST" http://127.0.0.1:8000/api/signup -H 'Content-Type: application/json' -d '{"username":"test_user","password":"abc123"}'
 ```
-[](Screenshots/new-user.png)
+![](Screenshots/new-user.png)
 &nbsp;
 - Creating a new ToDo through CUrl
 ```
 curl -X "POST" http://127.0.0.1:8000/api/todos -H 'Content-Type: application/json' -H 'Authorization: Token 4c38b8e43682f5d2e4046ff2545fb349a6e4ca87' -d '{"title": "ToDoTest","memo": "","important": true}'
 ```
-[](Screenshots/new_todo2.png)
+![](Screenshots/new_todo2.png)
   
 ## Getting started
 
